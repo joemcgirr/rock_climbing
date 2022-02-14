@@ -1,5 +1,5 @@
 ---
-title: "Assembling Our First Trad Rack"
+title: "Building Our First Trad Rack"
 author: "Joe McGirr"
 date: "`r Sys.Date()`"
 output:
@@ -103,6 +103,8 @@ print(hexes)
 # Analyses
 
 ## Crack size coverage
+
+Bars show the range of crack sizes that can be used for each piece. For cams, bars are labeled by size. All colors reflect manufacturer colors.
 
 ### Cams
 
@@ -281,6 +283,8 @@ print(p1)
 
 # Price
 
+MSRP Q1 2022
+
 ```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 6}
 
 prices <- gear %>% group_by(brand_model) %>% 
@@ -457,6 +461,8 @@ print(p1)
 ```
 
 # The winning combination
+
+Our final decisions
 
 ```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 5}
 
