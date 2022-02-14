@@ -1,0 +1,509 @@
+---
+title: "Assembling Our First Trad Rack"
+author: "Joe McGirr"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    collapsed: no
+    df_print: paged
+    number_sections: no
+    theme: paper
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+  html_notebook:
+    toc: yes
+    toc_depth: 5
+  pdf_document:
+    toc: yes
+    toc_depth: '5'
+editor_options:
+  chunk_output_type: console
+---
+
+
+```{css, echo=FALSE}
+pre, code {white-space:pre !important; overflow-x:auto}
+```
+
+# Our First Trad Rack
+
+Kimiko and I have been climbing for 5 years both indoors and outdoors. We've accumulated lots of gear for top rope, sport, and bouldering. The next thing to add to our climbing gear is a beginner's trad rack.
+
+After taking a trad placement workshop, we decided we want the following:
+
+	- 2 sets of cams. One set with low to mid sizes and one set with a full range that includes a couple big boys.
+	- A set of nuts with a full range of sizes.
+	- A set of hexes with mid to large sizes. 
+
+
+# Data
+
+We compiled a data set that includes gear from Black Diamond, Totoem, DMM, Metolius, and Wild Country based on recommendations from climbing friends.
+
+Prices reflect manufacturer MSRP Q1 2022.
+
+Brands and models shown below for each category.
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 3}
+
+library(IRanges) 
+library(tidyverse)
+
+# Wong, B. Points of view: Color blindness. Nat Methods (2011).
+bla <- '#000000'
+blu <- '#0072b2'
+grb <- '#56b4e9'
+lir <- '#cc79a7'
+gre <- '#009e73'
+red <- '#d55e00'
+org <- '#e69f00'
+yel <- '#f0e442'
+gry <- '#BBBBBB'
+
+my_cols <- c(blu,red,gry,gre,org,grb,lir,gry)
+
+gear <- read.delim("C:/Users/joseph.mcgirr/Personal/proj/climbing/placements.txt")
+gear$min <- gear$min * 10
+gear$max <- gear$max * 10
+gear$width <- gear$max - gear$min
+gear$brand_model <- paste(gear$brand, gear$model, sep = " / ")
+gear$brand_model_type <- paste(gear$brand, gear$model, gear$type, sep = " / ")
+gear$size <- as.character(gear$size)
+
+gear$color_code <-  str_replace_all(gear$color_code,"bla","#BBBBBB")
+gear$color_code <-  str_replace_all(gear$color_code,"blu","#0072b2")
+gear$color_code <-  str_replace_all(gear$color_code,"grb","#56b4e9")
+gear$color_code <-  str_replace_all(gear$color_code,"lir","#cc79a7")
+gear$color_code <-  str_replace_all(gear$color_code,"gre","#009e73")
+gear$color_code <-  str_replace_all(gear$color_code,"red","#d55e00")
+gear$color_code <-  str_replace_all(gear$color_code,"org","#e69f00")
+gear$color_code <-  str_replace_all(gear$color_code,"yel","#f0e442")
+gear$color_code <-  str_replace_all(gear$color_code,"gry","#BBBBBB")
+gear$color_code <-  str_replace_all(gear$color_code,"pur","#cc79a7")
+
+
+cams   <- filter(gear, type == "cam") %>% pull(brand_model) %>% unique()
+nuts   <- filter(gear, type == "nut") %>% pull(brand_model) %>% unique()
+hexes  <- filter(gear, type == "hex") %>% pull(brand_model) %>% unique()
+
+print("cams")
+print(cams)
+
+print("nuts")
+print(nuts)
+
+print("hexes")
+print(hexes)
+
+
+```
+
+# Analyses
+
+## Crack size coverage
+
+### Cams
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 3}
+
+for(cam in cams){
+
+i_gear <- filter(gear, brand_model %in% c(cam))	
+
+ir <- IRanges(i_gear$min,width = i_gear$width)
+bins <- disjointBins(IRanges(start(ir), end(ir) + 1))
+dat <- cbind(as.data.frame(ir), bin = bins)
+
+i_gear$min <- dat$start *0.1
+i_gear$max <- dat$end *0.1
+i_gear$bin <- dat$bin
+i_gear$width <- i_gear$width *0.1
+i_gear <- i_gear %>% 
+					mutate(plot_col = ifelse(type == "cam", "blu",ifelse(type == "nut","red","yel"))) %>%
+					mutate(bin2 = ifelse(type == "cam", 1,ifelse(type == "nut",2,3)))
+
+
+p1 <- ggplot(i_gear) + 
+      geom_rect(aes(xmin = min, xmax = max,
+                    ymin = bin, ymax = bin + 0.9),fill = i_gear$color_code) +
+			geom_text(data = i_gear, aes(x=min+((max-min)/2), y = bin+0.5, label = size), size = 3) +
+	xlab("\nrange (mm)") +
+	ggtitle(paste("cam = ",cam)) +
+	theme_minimal() +
+	xlim(0,200) +
+	theme(legend.position="none")+ 
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.text.x=element_text(size=14))
+
+print(p1)
+
+}
+
+```
+
+### Nuts
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 3}
+
+for(nut in nuts){
+
+i_gear <- filter(gear, brand_model %in% c(nut))	
+
+ir <- IRanges(i_gear$min,width = i_gear$width)
+bins <- disjointBins(IRanges(start(ir), end(ir) + 1))
+dat <- cbind(as.data.frame(ir), bin = bins)
+
+i_gear$min <- dat$start *0.1
+i_gear$max <- dat$end *0.1
+i_gear$bin <- dat$bin
+i_gear$width <- i_gear$width *0.1
+i_gear <- i_gear %>% 
+					mutate(plot_col = ifelse(type == "cam", "blu",ifelse(type == "nut","red","yel"))) %>%
+					mutate(bin2 = ifelse(type == "cam", 1,ifelse(type == "nut",2,3)))
+
+
+p1 <- ggplot(i_gear) + 
+      geom_rect(aes(xmin = min, xmax = max,
+                    ymin = bin, ymax = bin + 0.9, fill = type),fill = i_gear$color_code) +
+	#scale_fill_manual(values=c(blu,red,yel)) +
+	scale_fill_manual(values=c("nut" = red)) +
+	xlab("\nrange (mm)") +
+	ggtitle(paste("nut = ",nut)) +
+	theme(legend.position="none")+ 
+	theme_minimal() +
+	xlim(0,40) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+print(p1)
+
+}
+
+```
+
+### Hexes
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 3}
+
+for(hex in hexes){
+
+i_gear <- filter(gear, brand_model %in% c(hex))	
+
+ir <- IRanges(i_gear$min,width = i_gear$width)
+bins <- disjointBins(IRanges(start(ir), end(ir) + 1))
+dat <- cbind(as.data.frame(ir), bin = bins)
+
+i_gear$min <- dat$start *0.1
+i_gear$max <- dat$end *0.1
+i_gear$bin <- dat$bin
+i_gear$width <- i_gear$width *0.1
+i_gear <- i_gear %>% 
+					mutate(plot_col = ifelse(type == "cam", "blu",ifelse(type == "nut","red","yel"))) %>%
+					mutate(bin2 = ifelse(type == "cam", 1,ifelse(type == "nut",2,3)))
+
+
+p1 <- ggplot(i_gear) + 
+      geom_rect(aes(xmin = min, xmax = max,
+                    ymin = bin, ymax = bin + 0.9, fill = type),fill = i_gear$color_code) +
+	#scale_fill_manual(values=c(blu,red,yel)) +
+	scale_fill_manual(values=c("hex" = yel)) +
+	xlab("\nrange (mm)") +
+	ggtitle(paste("hex = ",hex)) +
+	theme_minimal() +
+	xlim(0,80) +
+	theme(legend.position="none")+ 
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+print(p1)
+
+}
+
+```
+
+## Crack size coverage with different combinations of gear
+
+Not all combinations are shown -- just the ones that I thought would be interesting given my initial biases from researching gear.
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 3}
+
+i_cams   <- cams[c(1,2,3)]
+i_nuts   <- nuts[c(1,5)]
+i_hexes  <- hexes[c(1)]
+
+for(cam in i_cams){
+	for(nut in i_nuts){
+		for(hex in i_hexes){
+			
+i_gear <- filter(gear, brand_model %in% c(cam,nut,hex))	
+
+ir <- IRanges(i_gear$min,width = i_gear$width)
+bins <- disjointBins(IRanges(start(ir), end(ir) + 1))
+dat <- cbind(as.data.frame(ir), bin = bins)
+
+i_gear$min <- dat$start *0.1
+i_gear$max <- dat$end *0.1
+i_gear$bin <- dat$bin
+i_gear$width <- i_gear$width *0.1
+i_gear <- i_gear %>% 
+					mutate(plot_col = ifelse(type == "cam", "blu",ifelse(type == "nut","red","yel"))) %>%
+					mutate(bin2 = ifelse(type == "cam", 1,ifelse(type == "nut",2,3)))
+
+
+p1 <- ggplot(i_gear) + 
+      geom_rect(aes(xmin = min, xmax = max,
+                    ymin = bin, ymax = bin + 0.9, fill = type)) +
+	#scale_fill_manual(values=c(blu,red,yel)) +
+	scale_fill_manual(values=c("cam" = blu, "nut" = red, "hex" = yel)) +
+	xlab("\nrange (mm)") +
+	ggtitle(paste("cam = ",cam,"\n","nut = ",nut,"\n","hex = ",hex,sep = "")) +
+	theme_minimal() +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+print(p1)
+				
+		}
+	}
+}
+
+#brand <- str_split(gear$brand_model," : ")[[1]][1]
+#model <- str_split(gear$brand_model," : ")[[1]][2]
+
+```
+
+# Price
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 6}
+
+prices <- gear %>% group_by(brand_model) %>% 
+					summarize(total_price = sum(price), price_per_piece = round(sum(price)/n(),2), type = unique(type))
+
+p1 <- filter(prices, type == "cam") %>%
+			ggplot(aes(brand_model, total_price)) +
+			geom_col() +
+			geom_text(aes(label=total_price), position=position_dodge(width=0.9), vjust=-0.25) +
+			theme_minimal() +
+	    theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12),
+	    			axis.title.y=element_text(size=14))+
+			ylab("total price $\n") + xlab("brand / model") + ggtitle("cams")
+
+print(p1)
+
+p1 <- filter(prices, type == "cam") %>%
+			ggplot(aes(brand_model, price_per_piece)) +
+			geom_col() +
+			geom_text(aes(label=price_per_piece), position=position_dodge(width=0.9), vjust=-0.25) +
+			theme_minimal() +
+			theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12),
+	    			axis.title.y=element_text(size=14))+
+			ylab("price per piece $\n") + xlab("brand / model") + ggtitle("cams")
+
+print(p1)
+
+
+
+p1 <- filter(prices, type == "nut") %>%
+			ggplot(aes(brand_model, total_price)) +
+			geom_col() +
+			geom_text(aes(label=total_price), position=position_dodge(width=0.9), vjust=-0.25) +
+			theme_minimal() +
+	    theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12),
+	    			axis.title.y=element_text(size=14))+
+			ylab("total price $\n") + xlab("brand / model") + ggtitle("nuts")
+
+print(p1)
+
+p1 <- filter(prices, type == "nut") %>%
+			ggplot(aes(brand_model, price_per_piece)) +
+			geom_col() +
+			geom_text(aes(label=price_per_piece), position=position_dodge(width=0.9), vjust=-0.25) +
+			theme_minimal() +
+	    theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12),
+	    			axis.title.y=element_text(size=14))+
+			ylab("price per piece $\n") + xlab("brand / model") + ggtitle("nut")
+
+print(p1)
+
+
+
+p1 <- filter(prices, type == "hex") %>%
+			ggplot(aes(brand_model, total_price)) +
+			geom_col() +
+			geom_text(aes(label=total_price), position=position_dodge(width=0.9), vjust=-0.25) +
+			theme_minimal() +
+	    theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12),
+	    			axis.title.y=element_text(size=14))+
+			ylab("total price $\n") + xlab("brand / model") + ggtitle("hexes")
+
+print(p1)
+
+p1 <- filter(prices, type == "hex") %>%
+			ggplot(aes(brand_model, price_per_piece)) +
+			geom_col() +
+			geom_text(aes(label=price_per_piece), position=position_dodge(width=0.9), vjust=-0.25) +
+			theme_minimal() +
+	    theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12),
+	    			axis.title.y=element_text(size=14))+
+			ylab("price per piece $\n") + xlab("brand / model") + ggtitle("hexes")
+
+print(p1)
+
+```
+
+# Price to Weight Ratio
+
+```{r, message=FALSE, warning=FALSE, fig.width= 9, fig.height= 5}
+
+n_brand_models <- gear %>% filter(type == "cam")%>% pull(brand_model) %>% unique() %>% length()
+
+p1 <- filter(gear, type == "cam") %>%
+			ggplot(aes(weight, price, color = brand_model)) +
+			geom_point(size = 4) +
+			geom_smooth(method = "lm", fill = "NA") +
+			theme_minimal() +
+			scale_color_manual(values = my_cols[c(1:n_brand_models)]) +
+	    theme(axis.title.x=element_text(size=14),
+	    			axis.title.y=element_text(size=14))+
+			ggtitle("cams") + xlab("\nweight (g)") + ylab("price ($)\n")
+
+print(p1)
+
+n_brand_models <- gear %>% filter(type == "nut")%>% pull(brand_model) %>% unique() %>% length()
+
+p1 <- filter(gear, type == "nut") %>%
+			ggplot(aes(weight, price, color = brand_model)) +
+			geom_point(size = 4) +
+			geom_smooth(method = "lm", fill = "NA") +
+			theme_minimal() +
+			scale_color_manual(values = my_cols[c(1:n_brand_models)]) +
+	    theme(axis.title.x=element_text(size=14),
+	    			axis.title.y=element_text(size=14))+
+			ggtitle("nuts") + xlab("\nweight (g)") + ylab("price ($)\n")
+
+print(p1)
+
+n_brand_models <- gear %>% filter(type == "nut")%>% pull(brand_model) %>% unique() %>% length()
+
+p1 <- filter(gear, type == "hex") %>%
+			ggplot(aes(weight, price, color = brand_model)) +
+			geom_point(size = 4) +
+			geom_smooth(method = "lm", fill = "NA") +
+			theme_minimal() +
+			scale_color_manual(values = my_cols[c(1:n_brand_models)]) +
+	    theme(axis.title.x=element_text(size=14),
+	    			axis.title.y=element_text(size=14))+
+			ggtitle("hexes") + xlab("\nweight (g)") + ylab("price ($)\n")
+
+print(p1)
+
+```
+
+# Strength to Weight Ratio
+
+```{r, message=FALSE, warning=FALSE, fig.width= 9, fig.height= 5}
+
+n_brand_models <- gear %>% filter(type == "cam")%>% pull(brand_model) %>% unique() %>% length()
+
+p1 <- filter(gear, type == "cam") %>%
+			ggplot(aes(weight, strength, color = brand_model)) +
+			geom_point(size = 4) +
+			geom_smooth(method = "lm", fill = "NA") +
+			theme_minimal() +
+			scale_color_manual(values = my_cols[c(1:n_brand_models)]) +
+	    theme(axis.title.x=element_text(size=14),
+	    			axis.title.y=element_text(size=14))+
+			ggtitle("cams") + xlab("\nweight (g)") + ylab("strength (kN)\n")
+
+print(p1)
+
+n_brand_models <- gear %>% filter(type == "nut")%>% pull(brand_model) %>% unique() %>% length()
+
+p1 <- filter(gear, type == "nut") %>%
+			ggplot(aes(weight, strength, color = brand_model)) +
+			geom_point(size = 4) +
+			geom_smooth(method = "lm", fill = "NA") +
+			theme_minimal() +
+			scale_color_manual(values = my_cols[c(1:n_brand_models)]) +
+	    theme(axis.title.x=element_text(size=14),
+	    			axis.title.y=element_text(size=14))+
+			ggtitle("nuts") + xlab("\nweight (g)") + ylab("strength (kN)\n")
+
+print(p1)
+
+n_brand_models <- gear %>% filter(type == "hex")%>% pull(brand_model) %>% unique() %>% length()
+
+p1 <- filter(gear, type == "hex") %>%
+			ggplot(aes(weight, strength, color = brand_model)) +
+			geom_point(size = 4) +
+			geom_smooth(method = "lm", fill = "NA") +
+			theme_minimal() +
+			scale_color_manual(values = my_cols[c(1:n_brand_models)]) +
+	    theme(axis.title.x=element_text(size=14),
+	    			axis.title.y=element_text(size=14))+
+			ggtitle("hexes") + xlab("\nweight (g)") + ylab("strength (kN)\n")
+
+print(p1)
+
+
+
+```
+
+# The winning combination
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 5}
+
+i_cams   <- filter(gear, brand_model %in% c(cams[c(1,3)]))
+i_nuts1   <- filter(gear, brand_model %in% c(nuts[c(1)]))
+i_nuts   <- filter(gear, brand_model %in% c(nuts[c(5)]), size %in% c(1:5)) %>% bind_rows(i_nuts1)
+i_hexes  <- filter(gear, brand_model %in% c(hexes[c(1)]))
+
+i_gear <- bind_rows(i_cams,i_nuts,i_hexes)
+
+ir <- IRanges(i_gear$min,width = i_gear$width)
+bins <- disjointBins(IRanges(start(ir), end(ir) + 1))
+dat <- cbind(as.data.frame(ir), bin = bins)
+
+i_gear$min <- dat$start *0.1
+i_gear$max <- dat$end *0.1
+i_gear$bin <- dat$bin
+i_gear$width <- i_gear$width *0.1
+i_gear <- i_gear %>% 
+					mutate(plot_col = ifelse(type == "cam", "blu",ifelse(type == "nut","red","yel"))) %>%
+					mutate(bin2 = ifelse(type == "cam", 1,ifelse(type == "nut",2,3)))
+
+
+p1 <- ggplot(i_gear) + 
+      geom_rect(aes(xmin = min, xmax = max,
+                    ymin = bin, ymax = bin + 0.9, fill = type)) +
+	#scale_fill_manual(values=c(blu,red,yel)) +
+	scale_fill_manual(values=c("cam" = blu, "nut" = red, "hex" = yel)) +
+	xlab("\nrange (mm)") +
+	ggtitle(paste("cam = WC Friends and Totems","\n",
+								"nut = Wild Country Rock size 1-5 and DMM Allot Offset 7-11 ","\n",
+								"hex = Wild Country Rockcentric - Sling size 5-9",sep = "")) +
+	theme_minimal() +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+print(p1)
+				
+```
+
+# The Damage
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 5}
+
+print(paste("cost: $",sum(i_gear$price), sep = ""))
+
+```
+
+

@@ -1,0 +1,109 @@
+brand	model	size	min	max	color_code	strength	weight	price	date	type
+Totem	Totem	0.5	11.7	18.9	bla	6	69	89.95	2/10/2022	cam
+Totem	Totem	0.65	13.8	22.5	blu	8	75	89.95	2/10/2022	cam
+Totem	Totem	0.8	17	27.7	yel	9	83	89.95	2/10/2022	cam
+Totem	Totem	1	20.9	34.2	pur	10	95	89.95	2/10/2022	cam
+Totem	Totem	1.25	25.7	42.3	gre	13	109	89.95	2/10/2022	cam
+Totem	Totem	1.5	31.6	52.2	red	13	132	89.95	2/10/2022	cam
+Totem	Totem	1.8	39.7	64.2	org	13	144	89.95	2/10/2022	cam
+Black Diamond	Camelot C4	0.3	13.8	23.4	blu	8	69.8	74.95	2/10/2022	cam
+Black Diamond	Camelot C4	0.4	15.5	26.7	bla	9	77.5	74.95	2/10/2022	cam
+Black Diamond	Camelot C4	0.5	19.6	33.5	pur	12	93	74.95	2/10/2022	cam
+Black Diamond	Camelot C4	0.75	23.9	41.2	gre	14	107.5	74.95	2/10/2022	cam
+Black Diamond	Camelot C4	1	30.2	52.1	red	14	123.9	79.99	2/10/2022	cam
+Black Diamond	Camelot C4	2	37.2	64.9	yel	14	140.3	79.99	2/10/2022	cam
+Black Diamond	Camelot C4	3	50.7	87.9	blu	14	181.1	79.99	2/10/2022	cam
+Black Diamond	Camelot C4	4	66	114.7	bla	14	257.8	99.95	2/10/2022	cam
+Black Diamond	Camelot C4	5	85.4	148.5	pur	14	348.1	119.95	2/10/2022	cam
+Black Diamond	Camelot C4	6	114.1	195	gre	14	529.9	139.95	2/10/2022	cam
+Wild Country	Friend	0.1	8.5	13.2	red	5	51	79.95	2/10/2022	cam
+Wild Country	Friend	0.2	10.4	15.7	yel	6	58.1	79.95	2/10/2022	cam
+Wild Country	Friend	0.3	13.8	22.3	blu	8	68.6	79.95	2/10/2022	cam
+Wild Country	Friend	0.4	15.8	25.9	bla	9	70.6	79.95	2/10/2022	cam
+Wild Country	Friend	0.5	20.2	32.9	pur	9	76.9	79.95	2/10/2022	cam
+Wild Country	Friend	0.75	25.4	40.1	gre	9	82.6	79.95	2/10/2022	cam
+Wild Country	Friend	1	31.7	53.6	red	12	123	74.95	2/10/2022	cam
+Wild Country	Friend	2	41.5	69.3	yel	12	142	74.95	2/10/2022	cam
+Wild Country	Friend	3	52.7	88	blu	12	192	79.95	2/10/2022	cam
+Wild Country	Friend	4	66.8	112.1	bla	12	260	89.95	2/10/2022	cam
+DMM	Dragon Cams	0-0	14	21	blu	10	75	83.94	2/10/2022	cam
+DMM	Dragon Cams	0	16	25	gry	14	85	83.94	2/10/2022	cam
+DMM	Dragon Cams	1	20	33	pur	14	103	83.94	2/10/2022	cam
+DMM	Dragon Cams	2	24	41	gre	14	117	86.24	2/10/2022	cam
+DMM	Dragon Cams	3	29	50	red	14	128	86.24	2/10/2022	cam
+DMM	Dragon Cams	4	38	64	yel	14	154	91.99	2/10/2022	cam
+DMM	Dragon Cams	5	50	85	blu	14	208	97.74	2/10/2022	cam
+DMM	Dragon Cams	6	68	114	gry	14	299	103.49	2/10/2022	cam
+DMM	Dragon Cams	7	88	149	pur	14	362	114.99	2/10/2022	cam
+DMM	Dragon Cams	8	116	195	gre	14	515	126.49	2/10/2022	cam
+Black Diamond	Camelot Ultralight	0.4	15.5	26.7	bla	8	61	89.96	2/10/2022	cam
+Black Diamond	Camelot Ultralight	0.5	19.6	33.5	pur	10	74	89.96	2/10/2022	cam
+Black Diamond	Camelot Ultralight	0.75	23.9	41.2	gre	12	89	98.96	2/10/2022	cam
+Black Diamond	Camelot Ultralight	1	30.2	52.1	red	12	101	98.96	2/10/2022	cam
+Black Diamond	Camelot Ultralight	2	37.2	64.9	yel	12	126	107.96	2/10/2022	cam
+Black Diamond	Camelot Ultralight	3	50.7	87.9	blu	12	167	116.96	2/10/2022	cam
+Black Diamond	Camelot Ultralight	4	66	114.7	bla	12	225	134.96	2/10/2022	cam
+DMM	Alloy Offset	7	12	15.1	yel	12	27	11.99	2/10/2022	nut
+DMM	Alloy Offset	8	13.5	17.9	blu	12	30	11.99	2/10/2022	nut
+DMM	Alloy Offset	9	17.1	21.4	red	12	37	11.99	2/10/2022	nut
+DMM	Alloy Offset	10	19.4	25.1	bla	12	45	11.99	2/10/2022	nut
+DMM	Alloy Offset	11	23.2	30	gre	12	56	11.99	2/10/2022	nut
+Black Diamond	Stopper	1	4.3	9.1	red	2	7	12.15	2/10/2022	nut
+Black Diamond	Stopper	2	4.8	9.9	yel	2	8	10.95	2/10/2022	nut
+Black Diamond	Stopper	3	6.1	11.4	blu	5	15	10.95	2/10/2022	nut
+Black Diamond	Stopper	4	6.9	12.4	bla	6	16	11.95	2/10/2022	nut
+Black Diamond	Stopper	5	8.4	13.5	pur	6	18	11.95	2/10/2022	nut
+Black Diamond	Stopper	6	10.2	15.5	gre	10	32	11.95	2/10/2022	nut
+Black Diamond	Stopper	7	11.7	16.3	red	10	34	11.95	2/10/2022	nut
+Black Diamond	Stopper	8	13.5	18.3	yel	10	37	11.95	2/10/2022	nut
+Black Diamond	Stopper	9	15.2	20.8	blu	10	39	11.95	2/10/2022	nut
+Black Diamond	Stopper	10	17.3	23.4	bla	10	43	12.95	2/10/2022	nut
+Black Diamond	Stopper	11	20.1	26.7	pur	10	51	12.95	2/10/2022	nut
+Black Diamond	Stopper	12	22.9	30.5	gre	10	58	12.95	2/10/2022	nut
+Black Diamond	Stopper	13	26.4	35.1	red	10	71	12.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	1	9.1	12.2	blu	7	23	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	2	10.2	12.8	yel	7	23	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	3	11.5	14.3	org	7	24	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	4	12.9	16.1	red	7	26	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	5	14.4	18	bla	7	30	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	6	16.1	20.1	gre	10	31	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	7	18	22.6	grb	10	34	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	8	20.2	25.3	lir	10	39	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	9	22.6	28.3	pur	10	46	14.95	2/10/2022	nut
+Metolius	Ultralight Curve Nut	10	25.3	31.7	blu	10	55	14.95	2/10/2022	nut
+Wild Country	Classic Rock	1	7	13	gry	6	16	6.6	2/10/2022	nut
+Wild Country	Classic Rock	2	8.2	13.8	gry	10	25	6.6	2/10/2022	nut
+Wild Country	Classic Rock	3	9.6	14.5	gry	10	28	6.6	2/10/2022	nut
+Wild Country	Classic Rock	4	11.3	15.3	gry	10	30	6.6	2/10/2022	nut
+Wild Country	Classic Rock	5	13.3	16.8	gry	10	32	6.6	2/10/2022	nut
+Wild Country	Classic Rock	6	15.6	19	gry	10	36	6.6	2/10/2022	nut
+Wild Country	Classic Rock	7	18.4	21.2	gry	10	38	6.6	2/10/2022	nut
+Wild Country	Classic Rock	8	21.6	24	gry	12	47	6.6	2/10/2022	nut
+Wild Country	Classic Rock	9	24.4	27.7	gry	12	60	6.6	2/10/2022	nut
+Wild Country	Classic Rock	10	30	31	gry	12	71	6.6	2/10/2022	nut
+Wild Country	Rock	1	7	13	pur	7	16	9.5	2/10/2022	nut
+Wild Country	Rock	2	8.2	13.8	gre	9	25	9.5	2/10/2022	nut
+Wild Country	Rock	3	9.6	14.5	gry	10	28	9.5	2/10/2022	nut
+Wild Country	Rock	4	11.3	15.3	yel	10	30	9.5	2/10/2022	nut
+Wild Country	Rock	5	13.3	16.8	blu	10	32	9.5	2/10/2022	nut
+Wild Country	Rock	6	15.6	19	red	10	36	9.5	2/10/2022	nut
+Wild Country	Rock	7	18.4	21.2	bla	10	38	9.5	2/10/2022	nut
+Wild Country	Rock	8	21.6	24	grb	10	41	9.5	2/10/2022	nut
+Wild Country	Rock	9	24.4	27.7	yel	10	49	9.5	2/10/2022	nut
+Wild Country	Rock	10	30	31	gry	10	60	9.5	2/10/2022	nut
+Wild Country	Rockcentric - Sling	5	33	41	gre	14	54	13.99	2/10/2022	hex
+Wild Country	Rockcentric - Sling	6	38	48	red	14	69	13.99	2/10/2022	hex
+Wild Country	Rockcentric - Sling	7	45	55	yel	14	91	13.99	2/10/2022	hex
+Wild Country	Rockcentric - Sling	8	52	64	blu	14	118	13.99	2/10/2022	hex
+Wild Country	Rockcentric - Sling	9	61	73	pur	14	156	13.99	2/10/2022	hex
+DMM	Torque Nut - Sling	1	31	41	gre	14	54	22.99	2/10/2022	hex
+DMM	Torque Nut - Sling	2	36	49	red	14	70	22.99	2/10/2022	hex
+DMM	Torque Nut - Sling	3	44	59	yel	14	104	22.99	2/10/2022	hex
+DMM	Torque Nut - Sling	4	54	71	blu	14	146	22.99	2/10/2022	hex
+Black Diamond	Hexentric - Wired	4	20.6	27.9	gry	10	51	16.29	2/10/2022	hex
+Black Diamond	Hexentric - Wired	5	23.9	33	pur	10	53	16.29	2/10/2022	hex
+Black Diamond	Hexentric - Wired	6	27.2	39.1	gre	10	64	16.29	2/10/2022	hex
+Black Diamond	Hexentric - Wired	7	33	45.7	red	10	86	16.29	2/10/2022	hex
+Black Diamond	Hexentric - Wired	8	39.1	54.1	yel	10	94	16.29	2/10/2022	hex
+Black Diamond	Hexentric - Wired	9	47	63.7	blu	10	124	16.29	2/10/2022	hex
+Black Diamond	Hexentric - Wired	10	55.6	75.2	gry	10	164	16.29	2/10/2022	hex
