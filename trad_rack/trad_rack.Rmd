@@ -64,7 +64,7 @@ gry <- '#BBBBBB'
 
 my_cols <- c(blu,red,gry,gre,org,grb,lir,gry)
 
-gear <- read.delim("C:/Users/joseph.mcgirr/Personal/proj/climbing/placements.txt")
+gear <- read.delim("https://raw.githubusercontent.com/joemcgirr/rock_climbing/main/trad_rack/placements.txt")
 gear$min <- gear$min * 10
 gear$max <- gear$max * 10
 gear$width <- gear$max - gear$min
