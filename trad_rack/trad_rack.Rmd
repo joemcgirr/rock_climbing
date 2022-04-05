@@ -493,7 +493,7 @@ p1 <- ggplot(i_gear) +
 	scale_fill_manual(values=c("cam" = blu, "nut" = red, "hex" = yel)) +
 	xlab("\nrange (mm)") +
 	ggtitle(paste("cam = WC Friends and Totems","\n",
-								"nut = Wild Country Rock size 1-5 and DMM Allot Offset 7-11 ","\n",
+								"nut = Wild Country Rock size 1-5 and DMM Alloy Offset 7-11 ","\n",
 								"hex = Wild Country Rockcentric - Sling size 5-9",sep = "")) +
 	theme_minimal() +
   theme(axis.title.y=element_blank(),
