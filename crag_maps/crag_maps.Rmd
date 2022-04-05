@@ -1,0 +1,79 @@
+---
+title: "Crags We've Climbed"
+author: "Joe McGirr"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    collapsed: no
+    df_print: paged
+    number_sections: no
+    theme: paper
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+  html_notebook:
+    toc: yes
+    toc_depth: 5
+  pdf_document:
+    toc: yes
+    toc_depth: '5'
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+
+#gs4_auth_configure(api_key = "AIzaSyD2r8gf36g15AN9qmDrK8pvyYjNxpgJdqA")
+googlesheets4::gs4_deauth()
+sites <- read_sheet("https://docs.google.com/spreadsheets/d/1mQcFZHitt_vI2jwdFT7HYhvsNHynVpNDf-Mt_esuFNE/edit?usp=sharing") %>% as.data.frame()
+
+```
+
+```{css, echo=FALSE}
+pre, code {white-space:pre !important; overflow-x:auto}
+```
+
+# Maps
+
+```{r, message=FALSE, warning=FALSE, fig.width= 10, fig.height= 3}
+
+library(tidyverse)
+#library(ggpubr)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+#library(ggspatial)
+#library(pophelper)
+#library(rgeos)
+library(googlesheets4)
+
+
+# Wong, B. Points of view: Color blindness. Nat Methods (2011).
+bla <- '#000000'
+blu <- '#0072b2'
+grb <- '#56b4e9'
+lir <- '#cc79a7'
+gre <- '#009e73'
+red <- '#d55e00'
+org <- '#e69f00'
+yel <- '#f0e442'
+gry <- '#BBBBBB'
+
+
+
+theme_set(theme_bw())
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+ggplot(data = world) +
+  geom_sf() +
+  geom_point(data = sites, aes(x = longitude, y = latitude, fill = state), size = 4, 
+             shape = 21) +
+  #scale_fill_manual(name = "Collection Years",values=c(red,blu,gre,lir,org,grb))+
+  coord_sf(xlim = c(-127, -65), ylim = c(24, 52), expand = FALSE)+
+  xlab("") + ylab("")
+  #theme(legend.position = c(0.23, 0.31))
+  #scale_y_continuous(position='right')
+
+```
+
